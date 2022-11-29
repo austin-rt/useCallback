@@ -194,20 +194,7 @@ webpack compiled with 1 warning
 
 # Enter the `useCallback` Hook
 
-In short, the `useCallback` hook allows you to cache, or ‘momo-ize’ a function between re-renders of your component. It performs a similar task to `useMemo`.
-
-Again from the React docs, we learn:
-
-<blockquote>
-The difference is in what they’re letting you cache.
-</br>
-</br>
-<code>useMemo</code> caches the result of calling your function.
-</br>
-</br>
-<code>useCallback</code> caches the function itself. 
-</blockquote>
-</br>
+In short, the `useCallback` hook allows you to cache, or ‘momo-ize’ a function between re-renders of your component. It performs a similar task to `useMemo`, the nuances of which we will get into in the `useMemo` lesson.
 
 If the nitty-gritty of this interests you, you can read more about it in the [React docs](https://beta.reactjs.org/apis/react/useCallback).
 
