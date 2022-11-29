@@ -107,7 +107,7 @@ webpack compiled with 1 warning
 
 **_NOTE: we must first save the file to recreate this `WARNING`_**
 
-If you dig into the [React Docs](https://beta.reactjs.org/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies), the few solutions this semi-confusing `WARNING` is suggesting are:
+If you dig into the [React Docs](https://beta.reactjs.org/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies), the few solutions suggested by this semi-confusing `WARNING` are as follows:
 
 ---
 
