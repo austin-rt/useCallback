@@ -9,7 +9,7 @@ In this lesson, we will learn how and when to use React's `useCallback` hook and
 
 # Referential Equality
 
-Referential Equality is a foundational concept in both JavaScript and Computer Science as a whole. So let's start with a demonstration of referential equality in action.
+Referential Equality is a foundational concept in both JavaScript and Computer Science as a whole. So let's start with a demonstration of it in action.
 
 You can simply read along or run `referrentialEquality.js` to observe the output.
 
