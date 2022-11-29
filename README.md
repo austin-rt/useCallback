@@ -200,10 +200,9 @@ If the nitty-gritty of this interests you, you can read more about it in the [Re
 
 Before diving any deeper, please read this note from the React docs:
 
-<blockquote>
-You should only rely on <code>useCallback</code> as a performance optimization. If your code doesn’t work without it, find the underlying problem and fix it first. Then you may add <code>useCallback</code> to improve performance.
-</blockquote>
-<br>
+```
+You should only rely on useCallback as a performance optimization. If your code doesn’t work without it, find the underlying problem and fix it first. Then you may add useCallback to improve performance.
+```
 
 # `useCallback` Syntax
 
