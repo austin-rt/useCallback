@@ -59,7 +59,7 @@ To demonstrate this further, we will define a function `func`, which returns an 
 
 ```js
 const func = () => {
-  return () => 'This is a pretend component';
+  return () => 'This is a pretend component.';
 };
 ```
 
