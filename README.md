@@ -55,7 +55,7 @@ console.log([] === []);
 // prints false
 ```
 
-To demonstrate this further, we will define a function `func`, which returns an anonymous function that, in turn, returns something else (think something like a JSX element).
+To demonstrate this further, we will define a function `func`, which returns an anonymous function that, in turn, returns something else (_like a JSX element_).
 
 ```js
 const func = () => {
