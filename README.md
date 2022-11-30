@@ -3,8 +3,8 @@ In this lesson, we will learn how and when to use React's `useCallback` hook and
 # Getting Started
 
 - `fork and clone`
-- `npm i`
 - `cd client`
+- `npm i`
 - `npm start`
 
 # Referential Equality
@@ -194,7 +194,7 @@ webpack compiled with 1 warning
 
 # Enter the `useCallback` Hook
 
-In short, the `useCallback` hook allows you to cache, or ‘momoize’ a function between re-renders of your component. It performs a similar task to `useMemo`, the nuances of which we will get into in the `useMemo` lesson.
+In short, the `useCallback` hook allows you to cache, or ‘memoize’ a function between re-renders of your component. It performs a similar task to `useMemo`, the nuances of which we will get into in the `useMemo` lesson.
 
 If the nitty-gritty of this interests you, you can read more about it in the [React docs](https://beta.reactjs.org/apis/react/useCallback).
 
