@@ -1,4 +1,6 @@
-In this lesson, we will learn how and when to use React's `useCallback` hook and how to avoid a mistake made by most Junior React Developers.
+In this lesson, we will explore when and how to use React’s `useCallback` hook and a mistake made by most Junior Developers.
+
+If you'd like to skim this as a Medium article, it can be found [here](https://medium.com/@austinrt/demystifying-react-hooks-usecallback-7c78fac08947)
 
 # Getting Started
 
@@ -11,7 +13,7 @@ In this lesson, we will learn how and when to use React's `useCallback` hook and
 
 Referential Equality is a foundational concept in both JavaScript and Computer Science as a whole. So let's start with a demonstration of it in action.
 
-You can simply read along or run `referrentialEquality.js` to observe the output.
+You can simply read along or run `referentialEquality.js` to observe the output.
 
 ```js
 console.log(1 === 1);
@@ -27,9 +29,9 @@ console.log('Referential Equality' === 'Referential Equality');
 // prints true
 ```
 
-This will always be the case for two [primative data types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) of the same value.
+Obviously, this will always be the case for two [primitive data types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) of the same value.
 
-Now, what about data structures? For example, two object literals with the same key/value pairs? What output should we see?
+Now, what about data structures? For example, two object literals with the same key/value pairs? What about empty object literals?
 
 ```js
 console.log({ a: 1 } === { a: 1 });
@@ -38,11 +40,9 @@ console.log({ a: 1 } === { a: 1 });
 
 Why would this print `false`? When comparing whether these two object literals are strictly equal, JavaScript uses their respective **_memory addresses_**.
 
-In other words, these two objects may contain the same **values**, but they're not **referencing the same object**.
+In other words, these two objects may contain the same **values**, but they're not **referencing the same object**. They _look_ the same but occupy two different _spaces in memory_.
 
-They _look_ the same but occupy two **_different_** spaces in memory.
-
-The same applies whether you're comparing two object literals, two array literals (even if they're empty), or two functions!
+The same applies whether you're comparing two object literals, two array literals, or two functions!
 
 ```js
 console.log({} === {});
@@ -71,18 +71,19 @@ const firstRender = func();
 const secondRender = func();
 ```
 
-Think of `func` as your React functional component, while `firstRender` is a function _inside_ of it on the first render, and `secondRender` is a function _inside_ of it on the second render.
+<blockquote>Think of <code>func</code> as your React functional component, while <code>firstRender</code> is a function _inside_ of it on the first render, and <code>secondRender</code> is a function _inside_ of it on the second render.</blockquote>
+<br>
 
-Even though `firstRender` and `secondRender` look the same, return the same value, and are even assigned their value from the same definition, they do not have **_referrential equality_**. As a result, every time the parent component renders, it redefines this function.
+Even though `firstRender` and `secondRender` look the same, return the same value, and are even assigned their value from the same definition, they do not have _referrential equality_. As a result, every time the parent component renders, it redefines this function.
 
 ```js
 console.log(firstRender === secondRender);
 // false
 ```
 
-Unfortunately, in JavaScript, it isn't easy to print these memory addresses (like it would be in Python), but for a slightly more in-depth explanation of reference vs. value, take a look at [this article](https://www.freecodecamp.org/news/how-to-get-a-grip-on-reference-vs-value-in-javascript-cba3f86da223/).
+Unfortunately, in JavaScript, it isn’t easy to print these memory addresses like in Python, but for a slightly more in-depth explanation of reference vs. value, take a look at[this article](https://www.freecodecamp.org/news/how-to-get-a-grip-on-reference-vs-value-in-javascript-cba3f86da223/).
 
-This topic can get dense, and you don't need to teach a class on it tonight. So for now, just remember
+This topic can get dense, and you don't need to teach a class on it tonight. So for now, just remember:
 
 - primitive data type `===` primitive data type
 - data structure `!==` data structure.
@@ -93,9 +94,9 @@ With referential equality out of the way, let's dive into our React code and see
 
 Start by looking through the provided code, then open your dev tools. We're going to be using the browser's console in a bit.
 
-After we spin up our app, open the `BookDetails.jsx` page, and save, the first thing we may notice when we look at our React server's logs is a common React warning that young developers tend to ignore. As you hit the workforce and start writing code for production, your linters will most likely be even more strict. `WARNINGS` will turn to `ERRORS`, and some linters won't even allow you to push without addressing them.
+After we spin up our app, open the `BookDetails.jsx` component and re-save. The first thing we may notice in our React dev server is a common `WARNING` that young developers tend to ignore. As you hit the workforce and start writing code for production, your linters will be even more strict than what’s built into `create-react-app`. `WARNINGS` will turn to `ERRORS`, and some linter rules won't even allow you to push without addressing these `ERRORS`.
 
-And brace yourself; most linters won't allow `console.logs` in your code. So the earlier you learn the proper way, the better. So, on to this `WARNING`.
+And brace yourself; most linters won't allow `console.logs` in your code. So the earlier you learn the proper way, the better. So rather than ignore it, let’s figure out how to treat it.
 
 ```
 WARNING in [eslint]
@@ -105,9 +106,9 @@ src/components/BookDetails.jsx
 webpack compiled with 1 warning
 ```
 
-**_NOTE: we must first save the file to recreate this `WARNING`_**
+**NOTE: you may first need to re-save BookDetails.jsx to create this `WARNING`**
 
-If you dig into the [React Docs](https://beta.reactjs.org/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies), the few solutions suggested by this semi-confusing `WARNING` are as follows:
+If we dig into the [React Docs](https://beta.reactjs.org/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies), we can decode the semi-confusing proposed solutions to this `WARNING` as follows:
 
 ---
 
@@ -115,7 +116,7 @@ Take a moment to think through the consequences of each option.
 
 <details>
 <summary>
-1. include the function definition inside of the <code>useEffect</code>
+1. Include the function definition inside of the<code>useEffect</code>
  </summary>
 <blockquote>
 We cannot call this function elsewhere unless we redefine it.
@@ -126,10 +127,10 @@ We cannot call this function elsewhere unless we redefine it.
 
 <details>
 <summary>
-2. remove the dependency array
+2. Remove the dependency array.
 </summary>
 <blockquote>
-This will trigger the <code>useEffect</code> <strong>every time</strong> the state or props change, typically causing an infinite re-render, and in our case, it will overload our API endpoint with infinite requests.
+This will trigger the <code>useEffect</code> <strong>every time</strong> the state or props change, typically causing an infinite re-render, and in our case, it could overload our API with infinite requests.
 </blockquote>
 </details>
 
@@ -137,7 +138,7 @@ This will trigger the <code>useEffect</code> <strong>every time</strong> the sta
 
 <details>
 <summary>
-3. remove the function call from the <code>useEffect</code>
+3. Remove the function call from the <code>useEffect</code>.
 </summary>
 <blockquote>
 The function won't get called.
@@ -148,7 +149,7 @@ The function won't get called.
 
 <details>
 <summary>
-4. include the function in the dependency array
+4. Include the function in the dependency array.
 </summary>
 <blockquote>
 The first time the component renders, it will define our function, which will trigger the useEffect, which will cause the component to re-render, which will redefine the function, which will trigger the useEffect, which will cause the component to re-render, which will redefine the function...
@@ -156,15 +157,15 @@ The first time the component renders, it will define our function, which will tr
 </details>
 </br>
 
-So... _what's a developer to do?_
+_So ...what's a developer to do?_
 
 ---
 
-The simplest and preferred solution would be to 'include it,' i.e., move the `getBookDetails` function definition inside the `useEffect`. This adheres to an Object-Oriented Programming principal known as [Encapsulation](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/).
+The simplest and preferred solution would be to 'include it,' that is, move the `getBookDetails` function definition inside the `useEffect`. This adheres to an Object-Oriented Programming principal known as [Encapsulation](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/).
 
-What if we need to call the function elsewhere? Should we redefine it later? That's not very DRY of us. So let's see React's other suggestion in the above warning.
+But let’s say we know we need to call the function elsewhere. Should we redefine it later? That’s not very DRY of us.
 
-Let's change our dependency array to include our function reference. Your `useEffect` should now look like this.
+Let’s change our dependency array to include our function reference. Your `useEffect` should now look like this.
 
 ```js
 useEffect(() => {
@@ -172,7 +173,7 @@ useEffect(() => {
 }, [getBookDetails]);
 ```
 
-And `getBookDetails` remains defined above, before the `useEffect`.
+And `getBookDetails` remains defined **above** the `useEffect`.
 
 ```js
 const getBookDetails = async () => {
@@ -194,11 +195,11 @@ webpack compiled with 1 warning
 
 # Enter the `useCallback` Hook
 
-In short, the `useCallback` hook allows you to cache, or ‘memoize’ a function between re-renders of your component. It performs a similar task to `useMemo`, the nuances of which we will get into in the `useMemo` lesson.
+In short, the `useCallback` hook allows you to cache, or ‘memoize,’ a function between re-renders of your component. It performs a similar task to `useMemo`, the nuances of which we will get into in a different article.
 
 If the nitty-gritty of this interests you, you can read more about it in the [React docs](https://beta.reactjs.org/apis/react/useCallback).
 
-Before diving any deeper, please read this note from the React docs:
+Please notice their warning:
 
 - You should only rely on <code>useCallback</code> as a performance optimization. If your code doesn’t work without it, find the underlying problem and fix it first. Then you may add <code>useCallback</code> to improve performance.
   <br>
@@ -213,17 +214,15 @@ useEffect(() => {}, []);
 useCallback(() => {}, []);
 ```
 
-The slight difference is this. With a `useEffect`, we tell the anonymous function to execute our function, while with a `useCallback`, we set the return value equal to a reference.
+The slight difference is with `useEffect`, we tell the anonymous function to execute our function while with `useCallback`, we assign the return value to a reference to be called elsewhere.
 
-It's okay if that sounds like nonsense. Just follow along, and we'll compare the two at the end.
-
-First, we will import `useCallback` from `'react'`.
+First, we will import `useCallback` from `'react'`. Rather than adding a new line, it’s best to destructure it along with our other imports.
 
 ```js
 import { useState, useEffect, useCallback } from 'react';
 ```
 
-Now that we've imported it, we can assign `getBookDetails` to the value returned from a `useCallback` function call.
+Now we can assign `getBookDetails` to the value returned from a `useCallback` function call.
 
 ```js
 const getBookDetails = useCallback();
@@ -235,7 +234,7 @@ Then we add all the syntax for `useCallback`. Remember your dependency array!
 const getBookDetails = useCallback(() => {}, []);
 ```
 
-Next, we add `async` before our parameters.
+In our example, we need `async` before our parameters.
 
 ```js
 const getBookDetails = useCallback(async () => {}, []);
@@ -273,7 +272,7 @@ If the value of <code>id</code> changes, `getBookDetails` needs to hit a differe
 </details>
 </br>
 
-After we add `id` to our dependency array, our finished `getBookDetails` and `useEffect` functions should look like this. Just look closely at the differences.
+After we add `id` to our dependency array, our finished `getBookDetails` and `useEffect` functions should look like this. Look closely at the differences between the way we implement the two hooks.
 
 ```js
 const getBookDetails = useCallback(async () => {
@@ -287,7 +286,7 @@ useEffect(() => {
 }, [getBookDetails]);
 ```
 
-And finally, we see green in our React logs. A happy linter is a happy Senior developer. And a happy Senior developer is a happy you.
+And finally, that’s it! We see green in our React dev server. A happy linter is a happy Senior Developer. And a happy Senior Developer is a happy you!
 
 # Resources
 
