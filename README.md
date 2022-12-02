@@ -1,3 +1,7 @@
+# Demystiofying React Hooks: useCallback
+
+![](./assets/png/useCallback-header-small.png)
+
 In this lesson, we will explore when and how to use React’s `useCallback` hook and a mistake made by most Junior Developers.
 
 If you'd like to skim this as a Medium article, it can be found [here](https://medium.com/@austinrt/demystifying-react-hooks-usecallback-7c78fac08947)
