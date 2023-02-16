@@ -10,7 +10,6 @@ const BookDetails = () => {
   const getBookDetails = async () => {
     const res = await axios.get(`${BASE_URL}/${id}`);
     setBook(res.data);
-    console.log(res.data);
   };
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const BookDetails = () => {
             />
             <h2 className='book-details__title'>
               {book.title}
-              {book.authors.map((author) => (
+              {book.authors.map(author => (
                 <div
                   key={author.name}
                   className='book-details__authors'

@@ -23,4 +23,7 @@ const funcFirstRender = func();
 
 const funcSecondRender = func();
 
-console.log('funcFirstRender === funcSecondRender', funcFirstRender === funcSecondRender);
+console.log(
+  'funcFirstRender === funcSecondRender',
+  funcFirstRender === funcSecondRender
+);
