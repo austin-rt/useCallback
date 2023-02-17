@@ -1,4 +1,4 @@
-# Demystifying React Hooks – `useCallback`
+# `useCallback` – Demystifying React Hooks (Pt. 1)
 
 ![header](./assets/png/useCallback-header-small.png)
 
