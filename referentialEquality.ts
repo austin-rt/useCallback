@@ -13,15 +13,15 @@ console.log('[1, 2, 3] === [1, 2, 3]', [1, 2, 3] === [1, 2, 3]); // false
 
 console.log('[] === []', [] === []); // false
 
-const func = () => {
+const func: Function = (): Function => {
   return () => {
     'This is a pretend functional component.';
   };
 };
 
-const funcFirstRender = func();
+const funcFirstRender: Function = func();
 
-const funcSecondRender = func();
+const funcSecondRender: Function = func();
 
 console.log(
   'funcFirstRender === funcSecondRender',
