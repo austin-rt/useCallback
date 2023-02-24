@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { Author, Book } from '../models/interfaces';
 import { BASE_URL } from '../constants';
+import { Author, Book } from '../models/interfaces';
 
 const BookDetails = () => {
   const { id } = useParams<{ id: string }>();
