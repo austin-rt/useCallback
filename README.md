@@ -97,7 +97,7 @@ const secondRender = func();
 
 Even though `firstRender` and `secondRender` look the same, return the same
 value, and are even assigned their value from the same definition, they do not
-have _referrential equality_. As a result, every time the parent component
+have _referential equality_. As a result, every time the parent component
 renders, it redefines this function.
 
 ```js
@@ -107,8 +107,8 @@ console.log(firstRender === secondRender);
 
 Unfortunately, in JavaScript, it isn’t easy to print these memory addresses like
 in Python, but for a slightly more in-depth explanation of reference vs. value,
-take a look
-at[this article](https://www.freecodecamp.org/news/how-to-get-a-grip-on-reference-vs-value-in-javascript-cba3f86da223/).
+take a look at
+[this article](https://www.freecodecamp.org/news/how-to-get-a-grip-on-reference-vs-value-in-javascript-cba3f86da223/).
 
 This topic can get dense, and you don't need to teach a class on it tonight. So
 for now, just remember:
