@@ -1,20 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Author, Book } from '../models/interfaces';
 import { BASE_URL } from '../constants';
-
-interface Author {
-  name: string;
-}
-
-interface Book {
-  title: string;
-  formats: {
-    'image/jpeg': string;
-  };
-  authors: Author[];
-  download_count: number;
-}
 
 const BookDetails = () => {
   const { id } = useParams<{ id: string }>();

@@ -2,14 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants';
-
-interface Book {
-  id: string;
-  formats: {
-    'image/jpeg': string;
-  };
-  title: string;
-}
+import { Book } from '../models/interfaces';
 
 const Books = () => {
   const [books, setBooks] = useState<Book[] | null>(null);
