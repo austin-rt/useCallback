@@ -1,53 +1,16 @@
-.book-details__page{
-  width: 100%;
-}
-
-.book-list__container,
-.book-details__container{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.book-list__card,
-.book-details__card {
-  text-align: center;
-  width: 400px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.book-list__title,
-.book-details__title {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.book-details__authors{
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.book-details__downloads{
-  display: flex;
-  font-size: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 .App {
   text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
@@ -63,4 +26,13 @@ a:hover {
 
 .App-link {
   color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
