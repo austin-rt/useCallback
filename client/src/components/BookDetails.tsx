@@ -3,12 +3,25 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 
+interface Author {
+  name: string;
+}
+
+interface Book {
+  title: string;
+  formats: {
+    'image/jpeg': string;
+  };
+  authors: Author[];
+  download_count: number;
+}
+
 const BookDetails = () => {
-  const { id } = useParams();
-  const [book, setBook] = useState(null);
+  const { id } = useParams<{ id: string }>();
+  const [book, setBook] = useState<Book | null>(null);
 
   const getBookDetails = async () => {
-    const res = await axios.get(`${BASE_URL}/${id}`);
+    const res = await axios.get<Book>(`${BASE_URL}/${id}`);
     setBook(res.data);
   };
 
@@ -28,7 +41,7 @@ const BookDetails = () => {
             />
             <h2 className='book-details__title'>
               {book.title}
-              {book.authors.map(author => (
+              {book.authors.map((author: Author) => (
                 <div
                   key={author.name}
                   className='book-details__authors'
@@ -46,4 +59,5 @@ const BookDetails = () => {
     </div>
   );
 };
+
 export default BookDetails;
