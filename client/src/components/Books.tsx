@@ -3,8 +3,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 
+interface Book {
+  id: string;
+  formats: {
+    'image/jpeg': string;
+  };
+  title: string;
+}
+
 const Books = () => {
-  const [books, setBooks] = useState(null);
+  const [books, setBooks] = useState<Book[] | null>(null);
 
   const getList = async () => {
     const res = await axios.get(`${BASE_URL}`);
@@ -18,7 +26,7 @@ const Books = () => {
   return (
     <div className='book-list__page'>
       <section className='book-list__container'>
-        {books?.map((book) => (
+        {books?.map(book => (
           <Link
             to={`/${book.id}`}
             key={book.id}
@@ -37,4 +45,5 @@ const Books = () => {
     </div>
   );
 };
+
 export default Books;
