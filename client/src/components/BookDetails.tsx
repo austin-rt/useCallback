@@ -9,8 +9,8 @@ const BookDetails = () => {
   const [book, setBook] = useState<Book | null>(null);
 
   const getBookDetails = async () => {
-    const res = await axios.get<Book>(`${BASE_URL}/${id}`);
-    setBook(res.data);
+    const { data } = await axios.get<Book>(`${BASE_URL}/${id}`);
+    setBook(data);
   };
 
   useEffect(() => {
