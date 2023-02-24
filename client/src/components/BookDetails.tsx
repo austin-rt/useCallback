@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Author, Book } from '../models/interfaces';
 import { BASE_URL } from '../constants';
@@ -8,14 +8,15 @@ const BookDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [book, setBook] = useState<Book | null>(null);
 
-  const getBookDetails = async () => {
-    const res = await axios.get<Book>(`${BASE_URL}/${id}`);
+  const getBookDetails = useCallback(async () => {
+    const res = await axios.get(`${BASE_URL}/${id}`);
     setBook(res.data);
-  };
+    console.log(res.data);
+  }, [id]);
 
   useEffect(() => {
     getBookDetails();
-  }, []);
+  }, [getBookDetails]);
 
   return (
     <div className='book-details__page'>
