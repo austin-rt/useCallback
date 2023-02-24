@@ -224,7 +224,6 @@ And `getBookDetails` remains defined **above** the `useEffect`.
 const getBookDetails = async () => {
   const res = await axios.get(`${BASE_URL}/${id}`);
   setBook(res.data);
-  console.log(res.data);
 };
 ```
 
@@ -301,7 +300,6 @@ And finally, we add the logic of our function into the code block.
 const getBookDetails = useCallback(async () => {
   const res = await axios.get(`${BASE_URL}/${id}`);
   setBook(res.data);
-  console.log(res.data);
 }, []);
 ```
 
@@ -335,7 +333,6 @@ between the way we implement the two hooks.
 const getBookDetails = useCallback(async () => {
   const res = await axios.get(`${BASE_URL}/${id}`);
   setBook(res.data);
-  console.log(res.data);
 }, [id]);
 
 useEffect(() => {
