@@ -8,8 +8,8 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
 
   const getBookDetails = async () => {
-    const res = await axios.get(`${BASE_URL}/${id}`);
-    setBook(res.data);
+    const { data } = await axios.get(`${BASE_URL}/${id}`);
+    setBook(data);
   };
 
   useEffect(() => {

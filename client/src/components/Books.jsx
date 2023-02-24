@@ -7,8 +7,8 @@ const Books = () => {
   const [books, setBooks] = useState(null);
 
   const getList = async () => {
-    const res = await axios.get(`${BASE_URL}`);
-    setBooks(res.data.results);
+    const { data } = await axios.get(`${BASE_URL}`);
+    setBooks(data.results);
   };
 
   useEffect(() => {
